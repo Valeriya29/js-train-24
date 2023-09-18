@@ -10,6 +10,23 @@ function task6() {
   // Використовуємо then для обробки зарезолвленого проміса, та виводимо `Проміс зарезолвився з значенням: ${value}`.
   // Якщо проміс відхилено, обробляємо помилку за допомогою catch, та виводимо `Проміс відхилився з помилкою: ${error}`.
   // Використовуємо finally для виконання дій після завершення проміса, незалежно від його статусу, та виводимо "Проміс завершено".
+  function promise1() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve("Проміс 1 виконано"), 1000);
+    });
+  }
+  function promise2() {
+    return new Promise((resolve, reject) => {
+      setImmediate(() => {
+        if (Math.random() < 0.5) resolve("Більше ніж 0.5");
+        else reject("Менше ніж 0.5");
+      });
+    });
+  }
+  promise2()
+    .then((value) => console.log(`Проміс зарезолвився з значенням: ${value}`))
+    .catch((error) => console.log(`Проміс відхилився з помилкою: ${error}`))
+    .finally(() => console.log("Проміс завершено"));
 }
 
 // Викликаємо функцію task6
